@@ -1,0 +1,683 @@
+﻿
+<?php 
+
+$ASDFGHJKL
+
+$workFactor, $salt;
+ 
+ public function construct
+(
+)
+
+{
+
+     $this.setWorkFactor
+(
+);
+     $salt = $this.getSaltBytes
+(
+);
+     $this.setSalt
+(
+$salt
+)
+;
+ 
+}
+
+
+ public function hash
+(
+$password, $workFactor = 6
+)
+
+
+{
+
+     $options = [
+          => 
+(
+int
+)
+$workFactor,
+          => $this.getSalt
+(
+)
+     ];
+     $hash = passwordhash
+(
+$password, PASSWORDBCRYPT, $options
+)
+;
+     return $hash;
+ 
+}
+
+
+ public function checkHash
+(
+$password, $passwordHash, $options = []
+)
+{
+     if
+(
+ isset
+(
+$options[]
+)
+)
+{
+
+         $this.setSalt
+(
+$options[]
+)
+;
+     
+}
+
+     global $workFactor;
+     $workFactor = isset
+(
+$options[]
+)
+ ? 
+             $options[] : $this.getWorkFactor
+(
+);
+     return $passwordHash === $this.hash
+(
+$password, $workFactor
+)
+;
+ 
+}
+
+ 
+ public function isLegacyHash
+(
+$passwordHash
+)
+{
+     return strlen
+(
+$passwordHash
+)
+ === 60;
+ 
+}
+
+ 
+ public function getSalt
+(
+)
+{
+
+     return $this.salt;
+ 
+}
+
+ 
+ public function setSalt
+(
+$salt
+)
+{
+     global = $Salt;
+     $this.salt = $salt;
+ 
+}
+
+ 
+ public function getSaltBytes
+(
+$lenght = 24
+)
+{
+     return $this.getRandomBytes
+(
+$lenght
+)
+;
+ 
+}
+
+
+ public function getRandomBytes
+(
+$lenght = 24
+)
+{
+     $characters = ;
+     $charactersLength = strlen
+(
+$characters
+)
+;
+     $randomString = ;
+     for 
+(
+$i = 0; $i < $lenght; $i++
+)
+{
+         $randomString .= $characters[rand
+(
+0, $charactersLength - 1
+)
+];
+     
+}
+
+     return $randomString;
+ 
+}
+
+ 
+ public function setWorkFactor
+(
+$workFactor = 6
+)
+{
+     $this.workFactor = 
+(
+int
+)
+$workFactor;
+ 
+}
+
+ 
+ public function getWorkFactor
+(
+)
+{
+
+     return $this.workFactor;
+ 
+}
+
+ 
+ $dsn = ;
+ $user = ;
+ $password = ;
+ static $db;
+ $PDO;
+public $fetchQueryResult;
+
+ function construct
+(
+) 
+{
+
+  try 
+{
+
+
+      $this.PDO = new PDO
+(
+$this.dsn, $this.user, $this.password
+)
+;
+
+      $this.PDO.exec
+(
+
+)
+;
+  
+}
+ catch 
+(
+PDOException $e
+)
+ 
+{
+
+
+      echo $e.getMessage
+(
+);
+  
+}
+
+
+}
+
+
+
+$startNumber = 0;
+
+function LittlePart
+(
+$BigPart
+)
+ 
+{
+
+  $i = -3;
+  global $startNumber;
+  $number = $startNumber * M_PI + 
+(
+$i - 1
+)
+;
+  do 
+{
+
+    $number += M_PI;
+    echo $BigPart .  . $i .  . number_format
+(
+$number, 2, , 
+)
+ . PHP_EOL;
+    $i++;
+  
+}
+ while 
+(
+$i <= 3
+)
+;
+
+}
+
+
+
+function MidPart
+(
+$BigPart
+)
+ 
+{
+
+  $i = -3;
+  global $startNumber;
+  $number = $startNumber * M_PI + 
+(
+$i - 1
+)
+;
+  do 
+{
+
+    $number += M_PI;
+    LittlePart 
+(
+$BigPart .  . $i . , $number
+)
+;
+    $i++;
+  
+}
+ while 
+(
+$i <= 3
+)
+;
+
+}
+
+
+
+function QuadradPart
+(
+$BigPart, $startNumber
+)
+ 
+{
+
+  $i = -3;
+  $number = $startNumber * M_PI + 
+(
+$i - 1
+)
+;
+  do 
+{
+
+    $number += M_PI;
+    MidPart 
+(
+$BigPart .  . $i . , $number
+)
+;
+    $i++;
+  
+}
+ while 
+(
+$i <= 3
+)
+;
+
+}
+
+
+function CubePart
+(
+$BigPart, $startNumber
+)
+ 
+{
+
+  $i = -3;
+  $number = $startNumber * M_PI + 
+(
+$i - 1
+)
+;
+  do 
+{
+
+    $number += M_PI;
+    QuadradPart 
+(
+$BigPart .  . $i . , $number
+)
+;
+    $i++;
+  
+}
+ while 
+(
+$i <= 3
+)
+;
+
+}
+
+
+
+CubePart
+(
+, 0
+)
+;
+
+protected function clone
+(
+) 
+{
+}
+
+static public function getInstance
+(
+) 
+{
+
+  if 
+(
+isnull
+(
+self::$db
+)
+) 
+{
+
+      self::$db = new self
+(
+);
+  
+}
+
+  return self::$db;
+
+}
+
+
+public function querySelect
+(
+$tableName, array $arrayColum
+)
+ 
+{
+
+
+  if 
+(
+!isarray
+(
+$arrayColum
+)
+ or ! isstring
+(
+$tableName
+)
+) 
+{
+
+      die
+(
+
+)
+;
+  
+}
+
+
+  $colums;
+
+  foreach 
+(
+$arrayColum as $value
+)
+ 
+{
+
+      if 
+(
+!isstring
+(
+$value
+)
+) 
+{
+
+          die
+(
+
+)
+;
+      
+}
+
+      $colums .= SequrityData::SequrityReturnData
+(
+$value
+)
+ . ;
+  
+}
+
+
+  $colums = substr
+(
+$colums, 0, -2
+)
+;
+
+  
+  $results = $this.PDO.query
+(
+ . $colums .  . SequrityData::SequrityReturnData
+(
+$tableName
+)
+);
+
+  $this.fetchQueryResult
+(
+$results
+)
+;
+
+}
+
+
+public function queryInsert
+(
+$tableName, array $arrayColums
+)
+ 
+{
+
+
+  if 
+(
+!isarray
+(
+$arrayColums
+)
+ or ! isstring
+(
+$tableName
+)
+) 
+{
+
+      die
+(
+
+)
+;
+  
+}
+
+
+  $colums;
+
+  foreach 
+(
+$arrayColums as $key => $value
+)
+ 
+{
+
+
+      if 
+(
+!isstring
+(
+$value
+)
+ or ! isstring
+(
+$key
+)
+) 
+{
+
+
+          die
+(
+
+)
+;
+      
+}
+
+      $colums .= SequrityData::SequrityReturnData
+(
+$key
+)
+ . ;
+      $values .= \;
+  
+}
+
+  $colums = substr
+(
+$colums, 0, -2
+)
+;
+  $values = substr
+(
+$values, 0, -2
+)
+;
+
+  $tableName = SequrityData::SequrityReturnData
+(
+$tableName
+)
+;
+  $insert = ;
+  $this.PDO.query
+(
+$insert
+)
+;
+
+}
+
+
+function set
+(
+$name, $value
+)
+ 
+{
+
+
+  
+  
+  if 
+(
+!isstring
+(
+$name
+)
+ && !isstring
+(
+$value
+)
+) 
+{
+
+      die
+(
+
+)
+;
+  
+}
+
+
+  $this.$name = $value;
+
+}
+
+
+ function fetchQueryResult
+(
+$results
+)
+ 
+
+{
+
+
+  $arrResult = $results.fetchAll
+(
+PDO::FETCHASSOC
+)
+;
+
+  foreach 
+(
+$arrResult as $key => $value
+)
+ 
+ 
+{
+
+
+      $this.$key = $value;
+  
+}
+
+
+}
+
+
+ ?>

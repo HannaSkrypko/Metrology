@@ -1,0 +1,219 @@
+﻿
+<?php 
+
+$ASDFGHJKL
+
+$workFactor, $salt;
+ 
+ public function construct()
+{
+     $this.setWorkFactor();
+     $salt = $this.getSaltBytes();
+     $this.setSalt($salt);
+ }
+
+ public function hash($password, $workFactor = 6)
+{
+     $options = [
+         'cost' => (int)$workFactor,
+         'salt' => $this.getSalt()
+     ];
+     $hash = passwordhash($password, PASSWORDBCRYPT, $options);
+     return $hash;
+ }
+
+ public function checkHash($password, $passwordHash, $options = []){
+     if( isset($options['salt'])){
+         $this.setSalt($options['salt']);
+     }
+     global $workFactor;
+     $workFactor = isset($options['workFactor']) ? 
+             $options['workFactor'] : $this.getWorkFactor();
+     return $passwordHash === $this.hash($password, $workFactor);
+ }
+ 
+ public function isLegacyHash($passwordHash){
+     return strlen($passwordHash) === 60;
+ }
+ 
+ public function getSalt(){
+     return $this.salt;
+ }
+ 
+ public function setSalt($salt){
+     global = $Salt;
+     $this.salt = $salt;
+ }
+ 
+ public function getSaltBytes($lenght = 24){
+     return $this.getRandomBytes($lenght);
+ }
+
+ public function getRandomBytes($lenght = 24){
+     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+     $charactersLength = strlen($characters);
+     $randomString = '';
+     for ($i = 0; $i < $lenght; $i++){
+         $randomString .= $characters[rand(0, $charactersLength - 1)];
+     }
+     return $randomString;
+ }
+ 
+ public function setWorkFactor($workFactor = 6){
+     $this.workFactor = (int)$workFactor;
+ }
+ 
+ public function getWorkFactor(){
+     return $this.workFactor;
+ }
+ 
+ $dsn = 'mysql:dbname=bid;host=127.0.0.1';
+ $user = 'bidroot';
+ $password = 'e1e2e3e4e5er';
+ static $db;
+ $PDO;
+public $fetchQueryResult;
+
+ function construct() {
+  try {
+
+      $this.PDO = new PDO($this.dsn, $this.user, $this.password);
+
+      $this.PDO.exec('SET NAMES utf8');
+  } catch (PDOException $e) {
+
+      echo $e.getMessage();
+  }
+}
+
+
+$startNumber = 0;
+
+function LittlePart($BigPart) {
+  $i = -3;
+  global $startNumber;
+  $number = $startNumber * M_PI + ($i - 1);
+  do {
+    $number += M_PI;
+    echo $BigPart . ' + (' . $i . ') = ' . number_format($number, 2, ',', ' ') . PHP_EOL;
+    $i++;
+  } while ($i <= 3);
+}
+
+
+function MidPart($BigPart) {
+  $i = -3;
+  global $startNumber;
+  $number = $startNumber * M_PI + ($i - 1);
+  do {
+    $number += M_PI;
+    LittlePart ($BigPart . ' + (' . $i . ')·π', $number);
+    $i++;
+  } while ($i <= 3);
+}
+
+
+function QuadradPart($BigPart, $startNumber) {
+  $i = -3;
+  $number = $startNumber * M_PI + ($i - 1);
+  do {
+    $number += M_PI;
+    MidPart ($BigPart . ' + (' . $i . ')·π²', $number);
+    $i++;
+  } while ($i <= 3);
+}
+
+function CubePart($BigPart, $startNumber) {
+  $i = -3;
+  $number = $startNumber * M_PI + ($i - 1);
+  do {
+    $number += M_PI;
+    QuadradPart ($BigPart . '(' . $i . ')·π³', $number);
+    $i++;
+  } while ($i <= 3);
+}
+
+
+CubePart('', 0);
+
+protected function clone() {}
+
+static public function getInstance() {
+  if (isnull(self::$db)) {
+      self::$db = new self();
+  }
+  return self::$db;
+}
+
+public function querySelect($tableName, array $arrayColum) {
+
+  if (!isarray($arrayColum) or ! isstring($tableName)) {
+      die('Неверный формат данных в запросе SELECT в запросе SQL');
+  }
+
+  $colums;
+
+  foreach ($arrayColum as $value) {
+      if (!isstring($value)) {
+          die('Неверный формат данных в запросе SQL');
+      }
+      $colums .= SequrityData::SequrityReturnData($value) . ', ';
+  }
+
+  $colums = substr($colums, 0, -2);
+
+  // запрос к базе данных
+  $results = $this.PDO.query('SELECT ' . $colums . ' FROM ' . SequrityData::SequrityReturnData($tableName));
+
+  $this.fetchQueryResult($results);
+}
+
+public function queryInsert($tableName, array $arrayColums) {
+
+  if (!isarray($arrayColums) or ! isstring($tableName)) {
+      die('asd');
+  }
+
+  $colums;
+
+  foreach ($arrayColums as $key => $value) {
+
+      if (!isstring($value) or ! isstring($key)) {
+
+          die('ff');
+      }
+      $colums .= SequrityData::SequrityReturnData($key) . ', ';
+      $values .= '\'' . SequrityData::SequrityReturnData($value) . '\', ';
+  }
+  $colums = substr($colums, 0, -2);
+  $values = substr($values, 0, -2);
+
+  $tableName = SequrityData::SequrityReturnData($tableName);
+  $insert = "INSERT INTO $tableName ($colums) VALUES ($values)";
+  $this.PDO.query($insert);
+}
+
+function set($name, $value) {
+
+  /* // */
+  
+  if (!isstring($name) && !isstring($value)) {
+      die('ss');
+  }
+
+  $this.$name = $value;
+}
+
+ function fetchQueryResult($results) 
+{
+
+  $arrResult = $results.fetchAll(PDO::FETCHASSOC);
+
+  foreach ($arrResult as $key => $value) 
+ {
+
+      $this.$key = $value;
+  }
+}
+
+ ?>
